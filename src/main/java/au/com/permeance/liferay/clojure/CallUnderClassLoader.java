@@ -20,9 +20,9 @@ import java.util.concurrent.Callable;
 
 public class CallUnderClassLoader<V> implements Callable<V> {
 
-    private final Callable<V> callable;
+    private transient final Callable<V> callable;
 
-    private final ClassLoader callClassLoader;
+    private transient final ClassLoader callClassLoader;
 
     public CallUnderClassLoader(final Callable<V> callable,
                                 final ClassLoader callClassLoader) {
@@ -31,8 +31,11 @@ public class CallUnderClassLoader<V> implements Callable<V> {
     }
 
     @Override
+    @SuppressWarnings("PMD.SignatureDeclareThrowsException")
     public V call() throws Exception {
+        @SuppressWarnings("PMD.DoNotUseThreads")
         final Thread thread = Thread.currentThread();
+        @SuppressWarnings("PMD.DataflowAnomalyAnalysis")
         final ClassLoader threadClassLoader = thread.getContextClassLoader();
         thread.setContextClassLoader(callClassLoader);
         try {

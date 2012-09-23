@@ -30,7 +30,7 @@ public class ClojureScriptingExecutor extends BaseScriptingExecutor {
 
     private static final String LANGUAGE = "clojure";
 
-    private final ClassLoader hookClassLoader;
+    private transient final ClassLoader hookClassLoader;
 
     private static final Log LOG = LogFactoryUtil.getLog(ClojureScriptingExecutor.class);
 
@@ -40,6 +40,7 @@ public class ClojureScriptingExecutor extends BaseScriptingExecutor {
     }
 
     public ClojureScriptingExecutor(final ClassLoader hookClassLoader) {
+        super();
         this.hookClassLoader = hookClassLoader;
     }
 
@@ -72,6 +73,7 @@ public class ClojureScriptingExecutor extends BaseScriptingExecutor {
         return new CallUnderClassLoader<Map<String, Object>>(callable, hookClassLoader);
     }
 
+    @SuppressWarnings("PMD.AvoidCatchingGenericException")
     protected <V> V callAndWrapException(final Callable<V> callable) throws ScriptingException {
         try {
             return callable.call();

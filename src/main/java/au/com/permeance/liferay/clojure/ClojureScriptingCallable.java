@@ -20,10 +20,11 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 import java.util.Collection;
-import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 import static java.lang.String.format;
 import static java.util.Collections.emptyMap;
@@ -32,11 +33,11 @@ public class ClojureScriptingCallable implements Callable<Map<String, Object>> {
 
     private static final Log LOG = LogFactoryUtil.getLog(ClojureScriptingCallable.class);
 
-    private final Map<String, Object> inputObjects;
+    private transient final Map<String, Object> inputObjects;
 
-    private final Set<String> outputNames;
+    private transient final Set<String> outputNames;
 
-    private final String script;
+    private transient final String script;
 
     public ClojureScriptingCallable(final Map<String, Object> inputObjects,
                                     final Set<String> outputNames,
@@ -47,7 +48,7 @@ public class ClojureScriptingCallable implements Callable<Map<String, Object>> {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({"unchecked", "PMD.SignatureDeclareThrowsException"})
     public Map<String, Object> call() throws Exception {
         final ClojureScriptable clojureScriptable = new ClojureScriptableImpl();
         final Object result = clojureScriptable.run_script(inputObjects, outputNames, script);
@@ -68,7 +69,7 @@ public class ClojureScriptingCallable implements Callable<Map<String, Object>> {
 
     protected <K, V> Map<K, V> retainKeys(final Map<K, V> result,
                                           final Collection<K> keys) {
-        final Map<K, V> map = new LinkedHashMap<K, V>(keys.size());
+        final ConcurrentMap<K, V> map = new ConcurrentHashMap<K, V>(keys.size());
 
         for (final K key : keys) {
             final V value = result.get(key);

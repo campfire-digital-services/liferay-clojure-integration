@@ -32,6 +32,7 @@ public class RegisterClojureExecutorAction extends SimpleAction {
     }
 
     protected ScriptingExecutor createClojureScriptingExecutor() {
+        @SuppressWarnings("PMD.DoNotUseThreads")
         final Thread thread = Thread.currentThread();
         final ClassLoader classLoader = thread.getContextClassLoader();
 
