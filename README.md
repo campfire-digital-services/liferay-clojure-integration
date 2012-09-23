@@ -86,7 +86,7 @@ Running from the control panel with the script:
 
 Produces in liferay's logs (formatted here):
 
-```shell
+```clojure
 #<Namespace sym__6__auto__>
 #<HashMap {actionResponse=com.liferay.portlet.ActionResponseImpl@2370a0ad,
            portletContext=com.liferay.portlet.PortletContextImpl@1142bdd,
