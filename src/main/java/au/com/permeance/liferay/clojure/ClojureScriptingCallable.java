@@ -26,6 +26,9 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
+import permeance.liferay.clojure.ClojureScriptableImpl;
+import permeance.liferay.clojure.ClojureScriptable;
+
 import static java.lang.String.format;
 import static java.util.Collections.emptyMap;
 

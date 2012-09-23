@@ -13,8 +13,8 @@
 ; You should have received a copy of the GNU General Public License along with
 ; liferay-clojure-integration. If not, see <http://www.gnu.org/licenses/>.
 
-(ns au.com.permeance.liferay.clojure.test
-  (:use au.com.permeance.liferay.clojure)
+(ns permeance.liferay.clojure.test
+  (:use permeance.liferay.clojure)
   (:use clojure.test))
 
 (deftest test-run-script-has-own-ns

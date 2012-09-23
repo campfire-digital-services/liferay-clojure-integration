@@ -13,7 +13,7 @@
 ; You should have received a copy of the GNU General Public License along with
 ; liferay-clojure-integration. If not, see <http://www.gnu.org/licenses/>.
 
-(ns au.com.permeance.liferay.clojure
+(ns permeance.liferay.clojure
   (:use clojure.contrib.with-ns))
 
 (def ^:dynamic input-objects)
@@ -31,11 +31,11 @@
   ClojureScriptable
   (run-script
     [this input-objects output-names script]
-    (require 'au.com.permeance.liferay.clojure)
+    (require 'permeance.liferay.clojure)
     (binding [input-objects input-objects
               output-names output-names
               script script]
       (use 'clojure.contrib.with-ns)
       (clojure.contrib.with-ns/with-temp-ns
-        (refer 'au.com.permeance.liferay.clojure)
+        (refer 'permeance.liferay.clojure)
         (load-string script)))))
