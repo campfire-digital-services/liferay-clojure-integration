@@ -17,6 +17,30 @@
   (:use au.com.permeance.liferay.clojure)
   (:use clojure.test))
 
+(deftest test-run-script-has-own-ns
+  (let [clojure-scriptable (->ClojureScriptableImpl)
+        input-objects {}
+        output-names #{"ns"}
+        script "{\"ns\" *ns*}"
+        result (.run-script clojure-scriptable input-objects output-names script)]
+    (is (= "sym" (subs (.toString (get result "ns")) 0 3)))))
+
+(deftest test-run-script-has-input-objects
+  (let [clojure-scriptable (->ClojureScriptableImpl)
+        input-objects {"one" 1 "two" 2 "three" 3}
+        output-names #{}
+        script "input-objects"
+        result (.run-script clojure-scriptable input-objects output-names script)]
+    (is (= input-objects result))))
+
+(deftest test-run-script-has-output-names
+  (let [clojure-scriptable (->ClojureScriptableImpl)
+        input-objects {}
+        output-names #{"one" "two" "three"}
+        script "output-names"
+        result (.run-script clojure-scriptable input-objects output-names script)]
+    (is (= #{"one" "two" "three"} result))))
+
 (deftest test-run-script
   (let [clojure-scriptable (->ClojureScriptableImpl)
         input-objects {"one" 1 "two" 2 "three" 3}
