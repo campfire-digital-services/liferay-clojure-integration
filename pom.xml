@@ -212,7 +212,7 @@ liferay-clojure-integration. If not, see <http://www.gnu.org/licenses/>.
         <portlet-api.version>2.0</portlet-api.version>
         <servlet-api.version>2.4</servlet-api.version>
         <!-- Plugin versions -->
-        <clojure-maven-plugin.version>1.3.11</clojure-maven-plugin.version>
+        <clojure-maven-plugin.version>1.3.12</clojure-maven-plugin.version>
         <liferay-maven-plugin.version>6.1.0</liferay-maven-plugin.version>
     </properties>
 
