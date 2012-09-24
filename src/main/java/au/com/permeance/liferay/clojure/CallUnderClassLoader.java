@@ -24,9 +24,9 @@ import java.util.concurrent.Callable;
  *
  * @param <V> the result type of method <tt>call</tt>
  *
- * @see {@link Callable}
- * @see {@link Thread#getContextClassLoader()}
- * @see {@link Thread#setContextClassLoader(ClassLoader)}
+ * @see Callable
+ * @see Thread#getContextClassLoader()
+ * @see Thread#setContextClassLoader(ClassLoader)
  */
 public class CallUnderClassLoader<V> implements Callable<V> {
 
@@ -59,9 +59,9 @@ public class CallUnderClassLoader<V> implements Callable<V> {
      * @return the result of invoking {@link java.util.concurrent.Callable#call()} on {@link #callable}.
      *
      * @throws Exception if invoking {@link java.util.concurrent.Callable#call()} on {@link #call()} throws it.
-     * @see {@link Thread#currentThread()}
-     * @see {@link Thread#setContextClassLoader(ClassLoader)}
-     * @see {@link Thread#getContextClassLoader()}
+     * @see Thread#currentThread()
+     * @see Thread#setContextClassLoader(ClassLoader)
+     * @see Thread#getContextClassLoader()
      */
     @Override
     @SuppressWarnings("PMD.SignatureDeclareThrowsException")

@@ -51,8 +51,8 @@ public class ClojureScriptingExecutor extends BaseScriptingExecutor {
     /**
      * Creates a new instance of ClojureScriptingExecutor using the current thread's class loader.
      *
-     * @see {@link Thread#currentThread()}
-     * @see {@link Thread#getContextClassLoader()}
+     * @see Thread#currentThread()
+     * @see Thread#getContextClassLoader()
      */
     public ClojureScriptingExecutor() {
         this(Thread.currentThread()

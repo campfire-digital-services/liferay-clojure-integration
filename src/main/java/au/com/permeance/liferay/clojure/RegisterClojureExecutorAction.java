@@ -24,8 +24,8 @@ import com.liferay.portal.kernel.scripting.ScriptingUtil;
 /**
  * This class provides a liferay action which registers the ClojureScriptingExecutor to liferay for script execution.
  *
- * @see {@link SimpleAction}
- * @see {@link ClojureScriptingExecutor}
+ * @see SimpleAction
+ * @see ClojureScriptingExecutor
  */
 public class RegisterClojureExecutorAction extends SimpleAction {
 
