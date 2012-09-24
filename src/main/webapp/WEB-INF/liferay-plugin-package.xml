@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+This file is part of liferay-clojure-integration.
+
+liferay-clojure-integration is free software: you can redistribute it and/or
+modify it under the terms of the GNU General Public License as published by the
+Free Software Foundation, either version 3 of the License, or (at your option)
+any later version.
+
+liferay-clojure-integration is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+more details.
+
+You should have received a copy of the GNU General Public License along with
+liferay-clojure-integration. If not, see <http://www.gnu.org/licenses/>.
+-->
+<!DOCTYPE plugin-package PUBLIC "-//Liferay//DTD Plugin Package 6.1.0//EN" "http://www.liferay.com/dtd/liferay-plugin-package_6_1_0.dtd">
+<plugin-package>
+    <name>liferay-clojure-integration</name>
+    <module-id>au.com.permeance/liferay-clojure-integration/0.1/war</module-id>
+    <types>
+        <type>hook</type>
+    </types>
+    <short-description>A scripting engine implementation for liferay enabling runtime scripting in clojure</short-description>
+    <change-log>https://github.com/permeance/liferay-clojure-integration/commits/master</change-log>
+    <page-url>https://github.com/permeance/liferay-clojure-integration</page-url>
+    <author>Martin Lau</author>
+    <licenses>
+        <license osi-approved="true">GNU Lesser General Public License, Version 3</license>
+    </licenses>
+    <liferay-versions>
+        <liferay-version>6.1.0+</liferay-version>
+    </liferay-versions>
+</plugin-package>
