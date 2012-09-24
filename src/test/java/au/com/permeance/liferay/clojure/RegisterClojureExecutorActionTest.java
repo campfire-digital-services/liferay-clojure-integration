@@ -18,6 +18,8 @@ package au.com.permeance.liferay.clojure;
 
 import com.liferay.portal.kernel.scripting.Scripting;
 import com.liferay.portal.kernel.scripting.ScriptingExecutor;
+import com.liferay.portal.kernel.scripting.ScriptingUtil;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -43,10 +45,15 @@ public class RegisterClojureExecutorActionTest {
     @Captor
     private ArgumentCaptor<ScriptingExecutor> scriptingExecutorArgumentCaptor;
 
+    @Before
+    public void setUp() throws Exception {
+        ScriptingUtil scriptingUtil = new ScriptingUtil();
+        scriptingUtil.setScripting(scripting);
+    }
+
     @Test
     public void testRun() throws Exception {
         RegisterClojureExecutorAction action = spy(new RegisterClojureExecutorAction());
-        when(action.getScripting()).thenReturn(scripting);
 
         action.run(new String[0]);
 
@@ -67,7 +74,6 @@ public class RegisterClojureExecutorActionTest {
     public void testRegisterScriptingExecutor() throws Exception {
         when(executor.getLanguage()).thenReturn("language");
         RegisterClojureExecutorAction action = spy(new RegisterClojureExecutorAction());
-        when(action.getScripting()).thenReturn(scripting);
 
         action.registerScriptingExecutor(executor);
 

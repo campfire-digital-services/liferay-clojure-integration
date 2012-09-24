@@ -16,22 +16,38 @@
  */
 package au.com.permeance.liferay.clojure;
 
-import com.liferay.portal.kernel.events.ActionException;
 import com.liferay.portal.kernel.events.SimpleAction;
 import com.liferay.portal.kernel.scripting.Scripting;
 import com.liferay.portal.kernel.scripting.ScriptingExecutor;
 import com.liferay.portal.kernel.scripting.ScriptingUtil;
 
+/**
+ * This class provides a liferay action which registers the ClojureScriptingExecutor to liferay for script execution.
+ *
+ * @see {@link SimpleAction}
+ * @see {@link ClojureScriptingExecutor}
+ */
 public class RegisterClojureExecutorAction extends SimpleAction {
 
+    /**
+     * Executes the action of creating and registering a {@link ClojureScriptingExecutor}.
+     *
+     * @param ids the company IDs for the portal (not used)
+     */
     @Override
-    public void run(final String[] ids) throws ActionException {
+    public final void run(final String[] ids) {
         final ScriptingExecutor executor = createClojureScriptingExecutor();
 
         registerScriptingExecutor(executor);
     }
 
-    protected ScriptingExecutor createClojureScriptingExecutor() {
+    /**
+     * Creates a {@link ClojureScriptingExecutor} which is associated with the {@link ClassLoader} of the current
+     * thread (the hook's {@link ClassLoader} rather than the Portal's under which scripts are invoked).
+     *
+     * @return the newly created {@link ScriptingExecutor}.
+     */
+    protected final ScriptingExecutor createClojureScriptingExecutor() {
         @SuppressWarnings("PMD.DoNotUseThreads")
         final Thread thread = Thread.currentThread();
         final ClassLoader classLoader = thread.getContextClassLoader();
@@ -39,15 +55,17 @@ public class RegisterClojureExecutorAction extends SimpleAction {
         return new ClojureScriptingExecutor(classLoader);
     }
 
-    protected void registerScriptingExecutor(final ScriptingExecutor executor) {
+    /**
+     * Registers the supplied {@link ScriptingExecutor} with liferay by calling {@link ScriptingUtil#getScripting()} to
+     * obtain the scripting engine, and then {@link Scripting#addScriptionExecutor(String, ScriptingExecutor)}.
+     *
+     * @param executor the {@link ScriptingExecutor} to register.
+     */
+    protected final void registerScriptingExecutor(final ScriptingExecutor executor) {
         final String language = executor.getLanguage();
-        final Scripting scripting = getScripting();
+        final Scripting scripting = ScriptingUtil.getScripting();
 
         scripting.addScriptionExecutor(language, executor);
-    }
-
-    protected Scripting getScripting() {
-        return ScriptingUtil.getScripting();
     }
 
 }

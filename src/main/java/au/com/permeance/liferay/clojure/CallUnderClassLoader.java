@@ -18,21 +18,54 @@ package au.com.permeance.liferay.clojure;
 
 import java.util.concurrent.Callable;
 
+/**
+ * This class provides a wrapper for the {@link Callable} interface which allows the call to be executed under a
+ * different {@link ClassLoader}.
+ *
+ * @param <V> the result type of method <tt>call</tt>
+ *
+ * @see {@link Callable}
+ * @see {@link Thread#getContextClassLoader()}
+ * @see {@link Thread#setContextClassLoader(ClassLoader)}
+ */
 public class CallUnderClassLoader<V> implements Callable<V> {
 
-    private transient final Callable<V> callable;
+    /**
+     * Stores the real callable to invoke under the {@link #callClassLoader}.
+     */
+    private final transient Callable<V> callable;
 
-    private transient final ClassLoader callClassLoader;
+    /**
+     * Stores the class loader to invoke the {@link #callable} under.
+     */
+    private final transient ClassLoader callClassLoader;
 
+    /**
+     * Creates a new instance of CallUnderClassLoader storing the supplied {@link Callable} and {@link ClassLoader} for invocation.
+     *
+     * @param callable        the {@link Callable} to invoke.
+     * @param callClassLoader the {@link ClassLoader} to invoke the callable under.
+     */
     public CallUnderClassLoader(final Callable<V> callable,
                                 final ClassLoader callClassLoader) {
         this.callable = callable;
         this.callClassLoader = callClassLoader;
     }
 
+    /**
+     * Sets the current thread's {@link ClassLoader} to {@link #callClassLoader} and then invokes {@link #callable},
+     * setting the original {@link ClassLoader} back after invocation.
+     *
+     * @return the result of invoking {@link java.util.concurrent.Callable#call()} on {@link #callable}.
+     *
+     * @throws Exception if invoking {@link java.util.concurrent.Callable#call()} on {@link #call()} throws it.
+     * @see {@link Thread#currentThread()}
+     * @see {@link Thread#setContextClassLoader(ClassLoader)}
+     * @see {@link Thread#getContextClassLoader()}
+     */
     @Override
     @SuppressWarnings("PMD.SignatureDeclareThrowsException")
-    public V call() throws Exception {
+    public final V call() throws Exception {
         @SuppressWarnings("PMD.DoNotUseThreads")
         final Thread thread = Thread.currentThread();
         @SuppressWarnings("PMD.DataflowAnomalyAnalysis")

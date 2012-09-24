@@ -26,22 +26,54 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
-import permeance.liferay.clojure.ClojureScriptableImpl;
 import permeance.liferay.clojure.ClojureScriptable;
+import permeance.liferay.clojure.ClojureScriptableImpl;
 
 import static java.lang.String.format;
 import static java.util.Collections.emptyMap;
 
+/**
+ * This class wraps the clojure generated ClojureScriptable protocol and ClojureScriptableImpl implementation classes
+ * for execution of scripts from within Liferay.
+ */
 public class ClojureScriptingCallable implements Callable<Map<String, Object>> {
 
+    /**
+     * Stores the logger for reporting errors.
+     */
     private static final Log LOG = LogFactoryUtil.getLog(ClojureScriptingCallable.class);
 
-    private transient final Map<String, Object> inputObjects;
+    /**
+     * Stores a reference to an object implementing the ClojureScriptable protocol for executing scripts.
+     */
+    private static final ClojureScriptable CLOJURE_SCRIPTABLE = new ClojureScriptableImpl();
 
-    private transient final Set<String> outputNames;
+    /**
+     * Stores the map of names to values of input objects, as supplied through
+     * {@link com.liferay.portal.kernel.scripting.BaseScriptingExecutor#eval(Set, Map, Set, String)}.
+     */
+    private final transient Map<String, Object> inputObjects;
 
-    private transient final String script;
+    /**
+     * Stores the map of names to values of output names, as supplied through
+     * {@link com.liferay.portal.kernel.scripting.BaseScriptingExecutor#eval(Set, Map, Set, String)}.
+     */
+    private final transient Set<String> outputNames;
 
+    /**
+     * Stores the script to execute, as supplied through
+     * {@link com.liferay.portal.kernel.scripting.BaseScriptingExecutor#eval(Set, Map, Set, String)}.
+     */
+    private final transient String script;
+
+    /**
+     * Creates a new instance of ClojureScriptingCallable, storing the supplied input objects, output names and script
+     * for use in the {@link #call()} method.
+     *
+     * @param inputObjects a map of input names to values to expose to the script.
+     * @param outputNames  a set of strings representing keys of the result map to return from {@link #call()}.
+     * @param script       the script to execute.
+     */
     public ClojureScriptingCallable(final Map<String, Object> inputObjects,
                                     final Set<String> outputNames,
                                     final String script) {
@@ -50,11 +82,19 @@ public class ClojureScriptingCallable implements Callable<Map<String, Object>> {
         this.script = script;
     }
 
+    /**
+     * Executes the {@link #script} associated with this instance, supplying the input objects and output names to
+     * the {@link #CLOJURE_SCRIPTABLE} to pass onto the script.
+     *
+     * @return a map representing the result of calling the script and extracting the {@link #outputNames} from its
+     *         result. Note: there are no guarantees made that this map will contain any of the requested keys - that's
+     *         up to the individual script to provide. However this method does ensure that any map keys which aren't
+     *         in {@link #outputNames} are removed.
+     */
     @Override
-    @SuppressWarnings({"unchecked", "PMD.SignatureDeclareThrowsException"})
-    public Map<String, Object> call() throws Exception {
-        final ClojureScriptable clojureScriptable = new ClojureScriptableImpl();
-        final Object result = clojureScriptable.run_script(inputObjects, outputNames, script);
+    @SuppressWarnings("unchecked")
+    public final Map<String, Object> call() {
+        final Object result = CLOJURE_SCRIPTABLE.run_script(inputObjects, outputNames, script);
 
         if (outputNames == null
             || outputNames.isEmpty()
@@ -70,18 +110,29 @@ public class ClojureScriptingCallable implements Callable<Map<String, Object>> {
         return retainKeys((Map<String, Object>) result, outputNames);
     }
 
-    protected <K, V> Map<K, V> retainKeys(final Map<K, V> result,
-                                          final Collection<K> keys) {
-        final ConcurrentMap<K, V> map = new ConcurrentHashMap<K, V>(keys.size());
+    /**
+     * This method retains the supplied keys in the supplied map - keys in the map which are missing from the set are
+     * absent from the returned map.
+     *
+     * @param map  the map to retain keys within.
+     * @param keys the keys to retain.
+     * @param <K>  the type of keys maintained by this map
+     * @param <V>  the type of mapped values
+     *
+     * @return a new map containing the keys supplied.
+     */
+    protected final <K, V> Map<K, V> retainKeys(final Map<K, V> map,
+                                                final Collection<K> keys) {
+        final ConcurrentMap<K, V> result = new ConcurrentHashMap<K, V>(keys.size());
 
         for (final K key : keys) {
-            final V value = result.get(key);
+            final V value = map.get(key);
             if (value != null) {
-                map.put(key, value);
+                result.put(key, value);
             }
         }
 
-        return map;
+        return result;
     }
 
 }
