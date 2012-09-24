@@ -37,6 +37,21 @@ liferay-clojure-integration. If not, see <http://www.gnu.org/licenses/>.
     <url>https://github.com/permeance/liferay-clojure-integration</url>
     <inceptionYear>2012</inceptionYear>
 
+    <developers>
+        <developer>
+            <id>martinlau</id>
+            <name>Martin Lau</name>
+            <email>martin.lau@permeance.com.au</email>
+            <url>http://hum.ph</url>
+            <organization>Permeance Technologies</organization>
+            <organizationUrl>http://www.permeance.com.au</organizationUrl>
+            <roles>
+                <role>Project creator</role>
+            </roles>
+            <timezone>+10</timezone>
+        </developer>
+    </developers>
+
     <scm>
         <connection>scm:git:git@github.com:permeance/liferay-clojure-integration.git</connection>
         <developerConnection>scm:git:git@github.com:permeance/liferay-clojure-integration.git</developerConnection>
