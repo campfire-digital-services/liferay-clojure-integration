@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+This file is part of liferay-clojure-integration.
+
+liferay-clojure-integration is free software: you can redistribute it and/or
+modify it under the terms of the GNU General Public License as published by the
+Free Software Foundation, either version 3 of the License, or (at your option)
+any later version.
+
+liferay-clojure-integration is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+more details.
+
+You should have received a copy of the GNU General Public License along with
+liferay-clojure-integration. If not, see <http://www.gnu.org/licenses/>.
+-->
+<project xmlns="http://maven.apache.org/DECORATION/1.3.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/DECORATION/1.3.0 http://maven.apache.org/xsd/decoration-1.3.0.xsd"
+         name="Liferay Clojure Integration">
+
+    <body>
+        <breadcrumbs>
+            <item href="http://www.permeance.com.au" name="Permeance Technologies"/>
+            <item href="index.html" name="Liferay Clojure Integration"/>
+        </breadcrumbs>
+        <menu ref="reports"/>
+    </body>
+
+    <custom>
+        <fluidoSkin>
+            <bodyColumnClass>span10</bodyColumnClass>
+            <facebookLike/>
+            <googlePlusOne/>
+            <gitHub>
+                <projectId>permeance/liferay-clojure-integration</projectId>
+                <ribbonOrientation>right</ribbonOrientation>
+                <ribbonColor>gray</ribbonColor>
+            </gitHub>
+            <leftColumnClass>span2</leftColumnClass>
+            <ohloh>
+                <projectId>liferay-clojure-integration</projectId>
+                <widget>stats</widget>
+            </ohloh>
+            <sourceLineNumbersEnabled>true</sourceLineNumbersEnabled>
+            <twitter>
+                <showFollowers>true</showFollowers>
+                <showUser>true</showUser>
+                <user>permtech</user>
+            </twitter>
+        </fluidoSkin>
+    </custom>
+
+    <googleAnalyticsAccountId>UA-6598203-1</googleAnalyticsAccountId>
+
+    <skin>
+        <groupId>org.apache.maven.skins</groupId>
+        <artifactId>maven-fluido-skin</artifactId>
+        <version>1.3.0</version>
+    </skin>
+
+</project>
