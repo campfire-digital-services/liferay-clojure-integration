@@ -1,0 +1,137 @@
+<HTML>
+<BODY BGCOLOR="white">
+<PRE>
+<FONT color="green">001</FONT>    /*<a name="line.1"></a>
+<FONT color="green">002</FONT>     * This file is part of liferay-clojure-integration.<a name="line.2"></a>
+<FONT color="green">003</FONT>     *<a name="line.3"></a>
+<FONT color="green">004</FONT>     * liferay-clojure-integration is free software: you can redistribute it and/or<a name="line.4"></a>
+<FONT color="green">005</FONT>     * modify it under the terms of the GNU General Public License as published by the<a name="line.5"></a>
+<FONT color="green">006</FONT>     * Free Software Foundation, either version 3 of the License, or (at your option)<a name="line.6"></a>
+<FONT color="green">007</FONT>     * any later version.<a name="line.7"></a>
+<FONT color="green">008</FONT>     *<a name="line.8"></a>
+<FONT color="green">009</FONT>     * liferay-clojure-integration is distributed in the hope that it will be useful,<a name="line.9"></a>
+<FONT color="green">010</FONT>     * but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY<a name="line.10"></a>
+<FONT color="green">011</FONT>     * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for<a name="line.11"></a>
+<FONT color="green">012</FONT>     * more details.<a name="line.12"></a>
+<FONT color="green">013</FONT>     *<a name="line.13"></a>
+<FONT color="green">014</FONT>     * You should have received a copy of the GNU General Public License along with<a name="line.14"></a>
+<FONT color="green">015</FONT>     * liferay-clojure-integration. If not, see &lt;http://www.gnu.org/licenses/&gt;.<a name="line.15"></a>
+<FONT color="green">016</FONT>     */<a name="line.16"></a>
+<FONT color="green">017</FONT>    package au.com.permeance.liferay.clojure;<a name="line.17"></a>
+<FONT color="green">018</FONT>    <a name="line.18"></a>
+<FONT color="green">019</FONT>    import com.liferay.portal.kernel.events.SimpleAction;<a name="line.19"></a>
+<FONT color="green">020</FONT>    import com.liferay.portal.kernel.scripting.Scripting;<a name="line.20"></a>
+<FONT color="green">021</FONT>    import com.liferay.portal.kernel.scripting.ScriptingExecutor;<a name="line.21"></a>
+<FONT color="green">022</FONT>    import com.liferay.portal.kernel.scripting.ScriptingUtil;<a name="line.22"></a>
+<FONT color="green">023</FONT>    <a name="line.23"></a>
+<FONT color="green">024</FONT>    /**<a name="line.24"></a>
+<FONT color="green">025</FONT>     * This class provides a liferay action which registers the ClojureScriptingExecutor to liferay for script execution.<a name="line.25"></a>
+<FONT color="green">026</FONT>     *<a name="line.26"></a>
+<FONT color="green">027</FONT>     * @see SimpleAction<a name="line.27"></a>
+<FONT color="green">028</FONT>     * @see ClojureScriptingExecutor<a name="line.28"></a>
+<FONT color="green">029</FONT>     */<a name="line.29"></a>
+<FONT color="green">030</FONT>    public class RegisterClojureExecutorAction extends SimpleAction {<a name="line.30"></a>
+<FONT color="green">031</FONT>    <a name="line.31"></a>
+<FONT color="green">032</FONT>        /**<a name="line.32"></a>
+<FONT color="green">033</FONT>         * Executes the action of creating and registering a {@link ClojureScriptingExecutor}.<a name="line.33"></a>
+<FONT color="green">034</FONT>         *<a name="line.34"></a>
+<FONT color="green">035</FONT>         * @param ids the company IDs for the portal (not used)<a name="line.35"></a>
+<FONT color="green">036</FONT>         */<a name="line.36"></a>
+<FONT color="green">037</FONT>        @Override<a name="line.37"></a>
+<FONT color="green">038</FONT>        public final void run(final String[] ids) {<a name="line.38"></a>
+<FONT color="green">039</FONT>            final ScriptingExecutor executor = createClojureScriptingExecutor();<a name="line.39"></a>
+<FONT color="green">040</FONT>    <a name="line.40"></a>
+<FONT color="green">041</FONT>            registerScriptingExecutor(executor);<a name="line.41"></a>
+<FONT color="green">042</FONT>        }<a name="line.42"></a>
+<FONT color="green">043</FONT>    <a name="line.43"></a>
+<FONT color="green">044</FONT>        /**<a name="line.44"></a>
+<FONT color="green">045</FONT>         * Creates a {@link ClojureScriptingExecutor} which is associated with the {@link ClassLoader} of the current<a name="line.45"></a>
+<FONT color="green">046</FONT>         * thread (the hook's {@link ClassLoader} rather than the Portal's under which scripts are invoked).<a name="line.46"></a>
+<FONT color="green">047</FONT>         *<a name="line.47"></a>
+<FONT color="green">048</FONT>         * @return the newly created {@link ScriptingExecutor}.<a name="line.48"></a>
+<FONT color="green">049</FONT>         */<a name="line.49"></a>
+<FONT color="green">050</FONT>        protected final ScriptingExecutor createClojureScriptingExecutor() {<a name="line.50"></a>
+<FONT color="green">051</FONT>            @SuppressWarnings("PMD.DoNotUseThreads")<a name="line.51"></a>
+<FONT color="green">052</FONT>            final Thread thread = Thread.currentThread();<a name="line.52"></a>
+<FONT color="green">053</FONT>            final ClassLoader classLoader = thread.getContextClassLoader();<a name="line.53"></a>
+<FONT color="green">054</FONT>    <a name="line.54"></a>
+<FONT color="green">055</FONT>            return new ClojureScriptingExecutor(classLoader);<a name="line.55"></a>
+<FONT color="green">056</FONT>        }<a name="line.56"></a>
+<FONT color="green">057</FONT>    <a name="line.57"></a>
+<FONT color="green">058</FONT>        /**<a name="line.58"></a>
+<FONT color="green">059</FONT>         * Registers the supplied {@link ScriptingExecutor} with liferay by calling {@link ScriptingUtil#getScripting()} to<a name="line.59"></a>
+<FONT color="green">060</FONT>         * obtain the scripting engine, and then {@link Scripting#addScriptionExecutor(String, ScriptingExecutor)}.<a name="line.60"></a>
+<FONT color="green">061</FONT>         *<a name="line.61"></a>
+<FONT color="green">062</FONT>         * @param executor the {@link ScriptingExecutor} to register.<a name="line.62"></a>
+<FONT color="green">063</FONT>         */<a name="line.63"></a>
+<FONT color="green">064</FONT>        protected final void registerScriptingExecutor(final ScriptingExecutor executor) {<a name="line.64"></a>
+<FONT color="green">065</FONT>            final String language = executor.getLanguage();<a name="line.65"></a>
+<FONT color="green">066</FONT>            final Scripting scripting = ScriptingUtil.getScripting();<a name="line.66"></a>
+<FONT color="green">067</FONT>    <a name="line.67"></a>
+<FONT color="green">068</FONT>            scripting.addScriptionExecutor(language, executor);<a name="line.68"></a>
+<FONT color="green">069</FONT>        }<a name="line.69"></a>
+<FONT color="green">070</FONT>    <a name="line.70"></a>
+<FONT color="green">071</FONT>    }<a name="line.71"></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+</BODY>
+</HTML>
