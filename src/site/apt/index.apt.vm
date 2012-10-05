@@ -35,7 +35,7 @@ Welcome to ${project.name}.
 
     To build this, you'll need to execute the via the standard "mvn package" command. Something like:
 
-+-----+
+-------
 $ mvn package
 [INFO] Scanning for projects...
 [INFO]
@@ -50,12 +50,11 @@ $ mvn package
 [INFO] Finished at: Sun Sep 23 23:13:23 EST 2012
 [INFO] Final Memory: 14M/81M
 [INFO] ------------------------------------------------------------------------
-```
-+-----+
+-------
 
     Once that is done, you should deploy the resulting WAR via the standard liferay deployment mechanism:
 
-+-----+
+-------
 $ cp target/*.war ~/Applications/liferay-portal-6.1.10-ee-ga1/deploy/
 ...
 23:20:31,585 INFO  [AutoDeployDir:167] Processing liferay-clojure-integration-0.1-SNAPSHOT.war
@@ -64,7 +63,7 @@ $ cp target/*.war ~/Applications/liferay-portal-6.1.10-ee-ga1/deploy/
 23:20:42,399 INFO  [HookHotDeployListener:962] Hook for liferay-clojure-integration-0.1-SNAPSHOT is available for use
 23:20:42,401 INFO  [PortletHotDeployListener:614] Registering portlets for liferay-clojure-integration-0.1-SNAPSHOT
 23:20:42,484 INFO  [PortletHotDeployListener:433] 1 portlet for liferay-clojure-integration-0.1-SNAPSHOT is available for use
-+-----+
+-------
 
 * Execution
 
@@ -82,15 +81,15 @@ $ cp target/*.war ~/Applications/liferay-portal-6.1.10-ee-ga1/deploy/
 
     Running from the control panel with the script:
 
-+-----+
+-------
 (println *ns*)
 (println input-objects)
 (println output-names)
-+-----+
+-------
 
     Produces in liferay's logs (formatted here):
 
-+-----+
+-------
 #<Namespace sym__6__auto__>
 #<HashMap{
     actionResponse=com.liferay.portlet.ActionResponseImpl@2370a0ad,
@@ -172,7 +171,7 @@ $ cp target/*.war ~/Applications/liferay-portal-6.1.10-ee-ga1/deploy/
     preferences=com.liferay.portlet.PortletPreferencesWrapper@155871e4,
     portletConfig=com.liferay.portlet.PortletConfigImpl@68515083}>
     nil
-+-----+
+-------
 
     (Note: 'output-names' is always empty when the script is executed from the control panel)
 
