@@ -24,8 +24,7 @@ liferay-clojure-integration. If not, see <http://www.gnu.org/licenses/>.
     <parent>
         <groupId>au.com.permeance</groupId>
         <artifactId>permeance-parent</artifactId>
-        <!-- TODO Bump to 0.3 when it's released -->
-        <version>0.3-SNAPSHOT</version>
+        <version>0.3</version>
     </parent>
 
     <groupId>au.com.permeance</groupId>
