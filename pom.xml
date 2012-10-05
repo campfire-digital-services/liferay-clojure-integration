@@ -24,6 +24,7 @@ liferay-clojure-integration. If not, see <http://www.gnu.org/licenses/>.
     <parent>
         <groupId>au.com.permeance</groupId>
         <artifactId>permeance-parent</artifactId>
+        <!-- TODO Bump to 0.3 when it's released -->
         <version>0.3-SNAPSHOT</version>
     </parent>
 
@@ -241,15 +242,5 @@ liferay-clojure-integration. If not, see <http://www.gnu.org/licenses/>.
         <liferay-maven-plugin.version>6.1.0</liferay-maven-plugin.version>
     </properties>
 
-    <!-- TODO Remove this and update parent version when permeance-parent:pom:0.3 is released -->
-    <repositories>
-        <repository>
-            <id>sonatype-nexus-snapshots</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
 </project>
 
