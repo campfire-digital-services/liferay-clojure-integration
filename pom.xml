@@ -56,6 +56,7 @@ liferay-clojure-integration. If not, see <http://www.gnu.org/licenses/>.
         <connection>scm:git:git@github.com:permeance/liferay-clojure-integration.git</connection>
         <developerConnection>scm:git:git@github.com:permeance/liferay-clojure-integration.git</developerConnection>
         <url>https://github.com/permeance/liferay-clojure-integration</url>
+        <tag>HEAD</tag>
     </scm>
 
     <issueManagement>
