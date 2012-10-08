@@ -24,7 +24,7 @@ liferay-clojure-integration. If not, see <http://www.gnu.org/licenses/>.
     <parent>
         <groupId>au.com.permeance</groupId>
         <artifactId>permeance-parent</artifactId>
-        <version>0.4</version>
+        <version>0.5</version>
     </parent>
 
     <groupId>au.com.permeance</groupId>
@@ -94,7 +94,7 @@ liferay-clojure-integration. If not, see <http://www.gnu.org/licenses/>.
                     <configuration>
                         <instrumentation>
                             <excludes>
-                                <exclude>permeance/liferay/**/*.class</exclude>
+                                <exclude>au/com/permeance/liferay/*.class</exclude>
                                 <exclude>clojure/contrib/**/*.class</exclude>
                             </excludes>
                         </instrumentation>
