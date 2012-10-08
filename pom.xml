@@ -28,7 +28,7 @@ liferay-clojure-integration. If not, see <http://www.gnu.org/licenses />.
     <groupId>au.com.permeance</groupId>
     <artifactId>liferay-clojure-integration</artifactId>
     <packaging>war</packaging>
-    <version>0.1</version>
+    <version>0.2-SNAPSHOT</version>
 
     <name>liferay-clojure-integration</name>
     <description>A scripting engine implementation for liferay enabling runtime scripting in clojure</description>
@@ -54,7 +54,7 @@ liferay-clojure-integration. If not, see <http://www.gnu.org/licenses />.
         <connection>scm:git:git@github.com:permeance/liferay-clojure-integration.git</connection>
         <developerConnection>scm:git:git@github.com:permeance/liferay-clojure-integration.git</developerConnection>
         <url>https://github.com/permeance/liferay-clojure-integration</url>
-        <tag>liferay-clojure-integration-0.1</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <issueManagement>
