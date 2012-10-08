@@ -32,7 +32,7 @@ liferay-clojure-integration. If not, see <http://www.gnu.org/licenses />.
 
     <name>liferay-clojure-integration</name>
     <description>A scripting engine implementation for liferay enabling runtime scripting in clojure</description>
-    <url>https://github.com/permeance/liferay-clojure-integration</url>
+    <url>http://permeance.github.com/liferay-clojure-integration</url>
     <inceptionYear>2012</inceptionYear>
 
     <developers>
