@@ -33,14 +33,19 @@ Welcome to ${project.name}.
 
 * Usage
 
-    To build this, you'll need to execute the via the standard "mvn package" command. Something like:
+    The easiest way to use this component is to download from
+    {{{http://repo1.maven.org/maven2/au/com/permeance/liferay-clojure-integration}central}} or
+    {{{https://github.com/permeance/liferay-clojure-integration/downloads}github}}.
+
+    If on the other hand you'd rather build from scratch, you'll need to execute the via the standard "mvn package"
+    command. Something like:
 
 -------
 $ mvn package
 [INFO] Scanning for projects...
 [INFO]
 [INFO] ------------------------------------------------------------------------
-[INFO] Building liferay-clojure-integration 0.1-SNAPSHOT
+[INFO] Building liferay-clojure-integration 0.1
 [INFO] ------------------------------------------------------------------------
 ...
 [INFO] ------------------------------------------------------------------------
@@ -52,17 +57,17 @@ $ mvn package
 [INFO] ------------------------------------------------------------------------
 -------
 
-    Once that is done, you should deploy the resulting WAR via the standard liferay deployment mechanism:
+    Once you've done one of these things and you have the WAR, you should deploy it via the standard liferay deployment mechanism:
 
 -------
-$ cp target/*.war ~/Applications/liferay-portal-6.1.10-ee-ga1/deploy/
+$ cp .../liferay-clojure-integration.war ~/Applications/liferay-portal-6.1.10-ee-ga1/deploy/
 ...
-23:20:31,585 INFO  [AutoDeployDir:167] Processing liferay-clojure-integration-0.1-SNAPSHOT.war
+23:20:31,585 INFO  [AutoDeployDir:167] Processing liferay-clojure-integration-0.1.war
 23:20:31,588 INFO  [PortletAutoDeployListener:61] Deploying package as a web application
 ...
-23:20:42,399 INFO  [HookHotDeployListener:962] Hook for liferay-clojure-integration-0.1-SNAPSHOT is available for use
-23:20:42,401 INFO  [PortletHotDeployListener:614] Registering portlets for liferay-clojure-integration-0.1-SNAPSHOT
-23:20:42,484 INFO  [PortletHotDeployListener:433] 1 portlet for liferay-clojure-integration-0.1-SNAPSHOT is available for use
+23:20:42,399 INFO  [HookHotDeployListener:962] Hook for liferay-clojure-integration-0.1 is available for use
+23:20:42,401 INFO  [PortletHotDeployListener:614] Registering portlets for liferay-clojure-integration-0.1
+23:20:42,484 INFO  [PortletHotDeployListener:433] 1 portlet for liferay-clojure-integration-0.1 is available for use
 -------
 
 * Execution
